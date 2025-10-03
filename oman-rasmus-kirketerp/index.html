@@ -11,11 +11,22 @@
       body { margin:0; padding:0; background:#fcf5f5; }
       table { border-collapse:collapse; }
       a { color:#1c1c1c; text-decoration:none; }
+
+      /* MOBILE TUNING */
       @media only screen and (max-width:600px) {
         .wrap { width:100% !important; }
         .px { padding-left:20px !important; padding-right:20px !important; }
         .stack { display:block !important; width:100% !important; }
-        .center { text-align:center !important; }
+        .col { width:100% !important; }
+        /* Fjern skæv padding når kort stakker på mobil */
+        .stack { padding-left:0 !important; padding-right:0 !important; }
+        /* Ens luft under hver kortboks (kun når de stakker) */
+        .stack .card { margin-bottom:16px !important; }
+        /* Flytider på én linje og lidt mindre på små skærme */
+        .flight .time { white-space:nowrap; font-variant-numeric: tabular-nums; font-size:13px; }
+        /* Sørg for at rute-chips ikke bryder linjen */
+        .chip { white-space:nowrap; }
+        /* Airline højre-kolonne ned på ny linje og venstrestilles */
         .airline { padding-top:8px !important; text-align:left !important; }
       }
 
@@ -35,14 +46,14 @@
 
       /* Fly-tidslinje */
       .flight { font-size:14px; line-height:22px; font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; }
-      .flight .hdr { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; padding:0 0 12px; } /* 12px under */
+      .flight .hdr { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; padding:0 0 12px; }
       .flight td { vertical-align:top; }
       .chip { display:inline-block; padding:2px 8px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:16px; }
 
       /* Diskret skillelinje mellom ut- og hjemreise */
       .flight .section-divider td { padding:10px 0 0; border-top:1px solid #f0ece4; }
 
-      /* Neste dag-markering */
+      /* Neste dag-markering (+1) */
       .plus1 { font-size:10px; vertical-align:super; color:#9d8665; font-weight:700; margin-left:2px; }
     </style>
   </head>
@@ -57,8 +68,8 @@
               <td style="padding:24px 28px; border-bottom:1px solid #e7e2da;">
                 <table role="presentation" width="100%">
                   <tr>
-                    <td align="left" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; color:#1c1c1c;">
-                      Makai Travels - Beyond Excellence
+                    <td align="left" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:22px; color:#1c1c1c;">
+                      Makai Travels
                     </td>
                     <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:12px; color:#6a6a6a;">
                       <span class="gold">Travel Designer</span><br>
@@ -105,10 +116,10 @@
                           <td style="padding:2px 0;">
                             <span class="chip">CPH → DOH</span>
                           </td>
-                          <td align="center" style="padding:2px 0;">
+                          <td class="time" align="center" style="padding:2px 0;">
                             <strong>[15:00]</strong> – <strong>[23:00]</strong>
                           </td>
-                          <td align="right" style="padding:2px 0%;">
+                          <td class="airline" align="right" style="padding:2px 0%;">
                             <span class="gold">Qatar Airways</span>
                           </td>
                         </tr>
@@ -125,10 +136,10 @@
                           <td style="padding:2px 0%;">
                             <span class="chip">DOH → MCT</span>
                           </td>
-                          <td align="center" style="padding:2px 0%;">
+                          <td class="time" align="center" style="padding:2px 0%;">
                             <strong>[01:10]<span class="plus1">+1</span></strong> – <strong>[04:10]<span class="plus1">+1</span></strong>
                           </td>
-                          <td align="right" style="padding:2px 0%;">
+                          <td class="airline" align="right" style="padding:2px 0%;">
                             <span class="gold">Qatar Airways</span>
                           </td>
                         </tr>
@@ -149,10 +160,10 @@
                           <td style="padding:2px 0%;">
                             <span class="chip">MCT → DOH</span>
                           </td>
-                          <td align="center" style="padding:2px 0%;">
+                          <td class="time" align="center" style="padding:2px 0%;">
                             <strong>[22:30]</strong> – <strong>[23:20]</strong>
                           </td>
-                          <td align="right" style="padding:2px 0%;">
+                          <td class="airline" align="right" style="padding:2px 0%;">
                             <span class="gold">Qatar Airways</span>
                           </td>
                         </tr>
@@ -163,10 +174,10 @@
                           <td style="padding:2px 0%;">
                             <span class="chip">DOH → CPH</span>
                           </td>
-                          <td align="center" style="padding:2px 0%;">
+                          <td class="time" align="center" style="padding:2px 0%;">
                             <strong>[01:00]<span class="plus1">+1</span></strong> – <strong>[06:35]<span class="plus1">+1</span></strong>
                           </td>
-                          <td align="right" style="padding:2px 0%;">
+                          <td class="airline" align="right" style="padding:2px 0%;">
                             <span class="gold">Qatar Airways</span>
                           </td>
                         </tr>
