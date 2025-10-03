@@ -5,16 +5,37 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Reisetilbud</title>
     <style>
+      /* Playfair kun til hero-overskrift (sort) – ikke til gull-overskrifter */
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
 
       body { margin:0; padding:0; background:#fcf5f5; }
       table { border-collapse:collapse; }
       a { color:#1c1c1c; text-decoration:none; }
 
+      /* MOBILE TUNING */
+      @media only screen and (max-width:600px) {
+        .wrap { width:100% !important; }
+        .px { padding-left:20px !important; padding-right:20px !important; }
+        .stack { display:block !important; width:100% !important; }
+        .col { width:100% !important; }
+        /* Fjern skæv padding når kort stakker på mobil */
+        .stack { padding-left:0 !important; padding-right:0 !important; }
+        /* Ens luft under hver kortboks (kun når de stakker) */
+        .stack .card { margin-bottom:16px !important; }
+        /* Flytider på én linje og lidt mindre på små skærme */
+        .flight .time { white-space:nowrap; font-variant-numeric: tabular-nums; font-size:13px; }
+        /* Sørg for at rute-chips ikke bryder linjen */
+        .chip { white-space:nowrap; }
+        /* Airline højre-kolonne ned på ny linje og venstrestilles */
+        .airline { padding-top:8px !important; text-align:left !important; }
+      }
+
       /* Typografi */
-      .heading { font-family:'Playfair Display', Georgia, serif; color:#1c1c1c; }
+      .heading { font-family:'Playfair Display', Georgia, serif; color:#1c1c1c; } /* hero */
       .text { font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; font-size:15px; line-height:24px; }
       .gold { color:#9d8665; }
+
+      /* Gull-overskrifter = Termes */
       .section-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665; }
       .hotel-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; line-height:1.2; font-weight:700; color:#9d8665; }
 
@@ -27,35 +48,13 @@
       .flight { font-size:14px; line-height:22px; font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; }
       .flight .hdr { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; padding:0 0 12px; }
       .flight td { vertical-align:top; }
-
-      .chip { display:inline-block; padding:2px 8px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:16px; white-space:nowrap; }
-
-      /* Tider – lås til én linje overalt */
-      .time { white-space:nowrap; font-variant-numeric: tabular-nums; }
+      .chip { display:inline-block; padding:2px 8px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:16px; }
 
       /* Diskret skillelinje mellom ut- og hjemreise */
       .flight .section-divider td { padding:10px 0 0; border-top:1px solid #f0ece4; }
 
-      /* Neste dag (+1) */
+      /* Neste dag-markering (+1) */
       .plus1 { font-size:10px; vertical-align:super; color:#9d8665; font-weight:700; margin-left:2px; }
-
-      /* Desktop padding for hotelkolonner */
-      .hotel-cell.pr { padding-right:10px; }
-      .hotel-cell.pl { padding-left:10px; }
-
-      /* Mobil-tuning */
-      @media only screen and (max-width:600px) {
-        .wrap { width:100% !important; }
-        .px { padding-left:20px !important; padding-right:20px !important; }
-        .stack { display:block !important; width:100% !important; }
-        .col { width:100% !important; }
-        /* Fjern forskudt padding når de stakker */
-        .hotel-cell.pr, .hotel-cell.pl { padding-left:0 !important; padding-right:0 !important; }
-        /* Ens bundafstand på hver hotelboks */
-        .hotel-card { margin-bottom:16px !important; }
-        /* Lidt mindre tidsskrift hvis pladsen er meget snæver */
-        .time { font-size:13px; }
-      }
     </style>
   </head>
   <body>
@@ -63,168 +62,257 @@
       <tr>
         <td align="center" style="padding:32px 16px;">
           <table role="presentation" width="680" class="wrap" bgcolor="#ffffff" style="border:1px solid #e7e2da; border-radius:14px; overflow:hidden;">
-
+            
             <!-- HEADER -->
             <tr>
               <td style="padding:24px 28px; border-bottom:1px solid #e7e2da;">
                 <table role="presentation" width="100%">
                   <tr>
-                    <td align="left" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:22px; color:#1c1c1c;">Makai Travels</td>
+                    <td align="left" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; color:#1c1c1c;">
+                      Makai Travels - Beyond Excellence
+                    </td>
                     <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:12px; color:#6a6a6a;">
-                      <span class="gold">Travel Designer</span><br>Rasmus Kirketerp<br>
+                      <span class="gold">Travel Designer</span><br>
+                      Rasmus Kirketerp<br>
                       <a href="mailto:rk@makaitravels.dk" style="color:#9d8665;">rk@makaitravels.dk</a>
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
-
+            
             <!-- HERO -->
             <tr>
               <td style="padding:36px 40px 20px;" class="px">
-                <div class="heading" style="font-size:28px; font-weight:700;">✦ REISETILBUD TIL MAGISKE OMAN ✦</div>
-                <div class="text" style="margin-top:6px; color:#6a6a6a;">07.–15. mars 2026 &nbsp;•&nbsp; 8 netter / 9 dager</div>
+                <div class="heading" style="font-size:28px; font-weight:700;">
+                  ✦ REISETILBUD TIL MAGISKE OMAN ✦
+                </div>
+                <div class="text" style="margin-top:6px; color:#6a6a6a;">
+                  07.–15. mars 2026 &nbsp;•&nbsp; 8 netter / 9 dager
+                </div>
               </td>
             </tr>
-
+            
             <!-- FLY -->
-            <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Flyreise</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 12px;" class="px">
+                <div class="section-title">Flyreise</div>
+              </td>
+            </tr>
             <tr>
               <td style="padding:0 40px 16px;" class="px">
                 <table role="presentation" width="100%" class="card">
-                  <tr><td style="padding:16px 18px;">
-                    <!-- UTREISE -->
-                    <table role="presentation" width="100%" class="flight">
-                      <tr><td colspan="3" class="hdr">Utreise – Lørdag 07.03.2026</td></tr>
-                      <tr>
-                        <td style="padding:2px 0;"><span class="chip">CPH → DOH</span></td>
-                        <td class="time" align="center" style="padding:2px 0; white-space:nowrap;"><strong>[15:00]</strong> – <strong>[23:00]</strong></td>
-                        <td class="airline" align="right" style="padding:2px 0%;"><span class="gold">Qatar Airways</span></td>
-                      </tr>
-                      <tr><td colspan="3" class="muted" style="padding:2px 0 6px 0;">Mellomlanding i Doha: [2t 10m]</td></tr>
-                      <tr>
-                        <td style="padding:2px 0%;"><span class="chip">DOH → MCT</span></td>
-                        <td class="time" align="center" style="padding:2px 0%; white-space:nowrap;"><strong>[01:10]<span class="plus1">+1</span></strong> – <strong>[04:10]<span class="plus1">+1</span></strong></td>
-                        <td class="airline" align="right" style="padding:2px 0%;"><span class="gold">Qatar Airways</span></td>
-                      </tr>
-                      <tr><td colspan="3" class="muted" style="padding:6px 0 10px;">Total reisetid utreise: 10t 55m</td></tr>
+                  <tr>
+                    <td style="padding:16px 18px;">
 
-                      <tr class="section-divider"><td colspan="3"></td></tr>
+                      <!-- UTREISE -->
+                      <table role="presentation" width="100%" class="flight">
+                        <tr>
+                          <td colspan="3" class="hdr">Utreise – Lørdag 07.03.2026</td>
+                        </tr>
 
-                      <!-- HJEMREISE -->
-                      <tr><td colspan="3" class="hdr">Hjemreise – Søndag 15.03.2026</td></tr>
-                      <tr>
-                        <td style="padding:2px 0%;"><span class="chip">MCT → DOH</span></td>
-                        <td class="time" align="center" style="padding:2px 0%; white-space:nowrap;"><strong>[22:30]</strong> – <strong>[23:20]</strong></td>
-                        <td class="airline" align="right" style="padding:2px 0%;"><span class="gold">Qatar Airways</span></td>
-                      </tr>
-                      <tr><td colspan="3" class="muted" style="padding:2px 0 6px 0;">Mellomlanding i Doha: [1t 40m]</td></tr>
-                      <tr>
-                        <td style="padding:2px 0%;"><span class="chip">DOH → CPH</span></td>
-                        <td class="time" align="center" style="padding:2px 0%; white-space:nowrap;"><strong>[01:00]<span class="plus1">+1</span></strong> – <strong>[06:35]<span class="plus1">+1</span></strong></td>
-                        <td class="airline" align="right" style="padding:2px 0%;"><span class="gold">Qatar Airways</span></td>
-                      </tr>
-                      <tr><td colspan="3" class="muted" style="padding-top:6px;">Total reisetid hjemreise: 10t 55m</td></tr>
-                    </table>
-                  </td></tr>
+                        <!-- Leg 1 -->
+                        <tr>
+                          <td style="padding:2px 0;">
+                            <span class="chip">CPH → DOH</span>
+                          </td>
+                          <td class="time" align="center" style="padding:2px 0;">
+                            <strong>[15:00]</strong> – <strong>[23:00]</strong>
+                          </td>
+                          <td class="airline" align="right" style="padding:2px 0%;">
+                            <span class="gold">Qatar Airways</span>
+                          </td>
+                        </tr>
+
+                        <!-- Mellomlanding -->
+                        <tr>
+                          <td colspan="3" class="muted" style="padding:2px 0 6px 0;">
+                            Mellomlanding i Doha: [2t 10m]
+                          </td>
+                        </tr>
+
+                        <!-- Leg 2 (etter midnatt) -->
+                        <tr>
+                          <td style="padding:2px 0%;">
+                            <span class="chip">DOH → MCT</span>
+                          </td>
+                          <td class="time" align="center" style="padding:2px 0%;">
+                            <strong>[01:10]<span class="plus1">+1</span></strong> – <strong>[04:10]<span class="plus1">+1</span></strong>
+                          </td>
+                          <td class="airline" align="right" style="padding:2px 0%;">
+                            <span class="gold">Qatar Airways</span>
+                          </td>
+                        </tr>
+
+                        <!-- Total utreise -->
+                        <tr>
+                          <td colspan="3" class="muted" style="padding:6px 0 10px;">Total reisetid utreise: 10t 55m</td>
+                        </tr>
+
+                        <!-- Skillelinje -->
+                        <tr class="section-divider"><td colspan="3"></td></tr>
+
+                        <!-- HJEMREISE -->
+                        <tr>
+                          <td colspan="3" class="hdr">Hjemreise – Søndag 15.03.2026</td>
+                        </tr>
+                        <tr>
+                          <td style="padding:2px 0%;">
+                            <span class="chip">MCT → DOH</span>
+                          </td>
+                          <td class="time" align="center" style="padding:2px 0%;">
+                            <strong>[22:30]</strong> – <strong>[23:20]</strong>
+                          </td>
+                          <td class="airline" align="right" style="padding:2px 0%;">
+                            <span class="gold">Qatar Airways</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" class="muted" style="padding:2px 0 6px 0;">Mellomlanding i Doha: [1t 40m]</td>
+                        </tr>
+                        <tr>
+                          <td style="padding:2px 0%;">
+                            <span class="chip">DOH → CPH</span>
+                          </td>
+                          <td class="time" align="center" style="padding:2px 0%;">
+                            <strong>[01:00]<span class="plus1">+1</span></strong> – <strong>[06:35]<span class="plus1">+1</span></strong>
+                          </td>
+                          <td class="airline" align="right" style="padding:2px 0%;">
+                            <span class="gold">Qatar Airways</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" class="muted" style="padding-top:6px;">Total reisetid hjemreise: 10t 55m</td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
                 </table>
               </td>
             </tr>
 
             <!-- TILLEGG: FLYOPPGRADERINGER -->
-            <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Tillegg: Flyoppgraderinger</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 12px;" class="px">
+                <div class="section-title">Tillegg: Flyoppgraderinger</div>
+              </td>
+            </tr>
             <tr>
               <td style="padding:0 40px 28px;" class="px">
                 <table role="presentation" width="100%" class="card">
-                  <tr><td style="padding:14px 18px;">
-                    <table role="presentation" width="100%" class="text" style="margin-top:12px;">
-                      <tr class="tight"><td>Premium Economy t/r</td><td align="right"><strong>NOK 15.000,-</strong></td></tr>
-                      <tr class="tight"><td>Business Class t/r</td><td align="right"><strong>NOK 30.000,-</strong></td></tr>
-                    </table>
-                    <div class="muted" style="margin-top:8px;">Prisene er totalpriser for det angitte antallet reisende og med forbehold om prisendringer og tilgjengelighet.</div>
-                  </td></tr>
+                  <tr>
+                    <td style="padding:14px 18px;">
+                      <table role="presentation" width="100%" class="text" style="margin-top:12px;">
+                        <tr class="tight">
+                          <td>Premium Economy t/r</td>
+                          <td align="right"><strong>NOK 15.000,-</strong></td>
+                        </tr>
+                        <tr class="tight">
+                          <td>Business Class t/r</td>
+                          <td align="right"><strong>NOK 30.000,-</strong></td>
+                        </tr>
+                      </table>
+                      <div class="muted" style="margin-top:8px;">
+                        Prisene er totalpriser for det angitte antallet reisende og med forbehold om prisendringer og tilgjengelighet.
+                      </div>
+                    </td>
+                  </tr>
                 </table>
               </td>
             </tr>
-
+            
             <!-- HOTELLER (4) -->
-            <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Hoteller i Muscat</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 12px;" class="px">
+                <div class="section-title">Hoteller i Muscat</div>
+              </td>
+            </tr>
+
             <tr>
               <td style="padding:0 40px 28px;" class="px">
                 <table role="presentation" width="100%">
                   <!-- Rad 1 -->
                   <tr>
-                    <td class="stack col hotel-cell pr">
-                      <div class="hotel-card">
-                        <table role="presentation" width="100%" class="card">
-                          <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
-                            <table width="100%" style="margin-top:12px;">
-                              <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
-                              <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
-                              <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
-                            </table>
-                          </td></tr>
-                        </table>
-                      </div>
+                    <!-- W Muscat #1 -->
+                    <td class="stack col" style="width:50%; padding-right:10px;">
+                      <table role="presentation" width="100%" class="card">
+                        <tr><td style="padding:16px 18px;" class="text">
+                          <div class="hotel-title">
+                            <a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a>
+                          </div>
+                          <table width="100%" style="margin-top:12px;">
+                            <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
+                            <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
+                            <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
+                          </table>
+                        </td></tr>
+                      </table>
                     </td>
 
-                    <td class="stack col hotel-cell pl">
-                      <div class="hotel-card">
-                        <table role="presentation" width="100%" class="card">
-                          <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
-                            <table width="100%" style="margin-top:12px;">
-                              <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
-                              <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
-                              <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
-                            </table>
-                          </td></tr>
-                        </table>
-                      </div>
+                    <!-- W Muscat #2 -->
+                    <td class="stack col" style="width:50%; padding-left:10px;">
+                      <table role="presentation" width="100%" class="card">
+                        <tr><td style="padding:16px 18px;" class="text">
+                          <div class="hotel-title">
+                            <a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a>
+                          </div>
+                          <table width="100%" style="margin-top:12px;">
+                            <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
+                            <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
+                            <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
+                          </table>
+                        </td></tr>
+                      </table>
                     </td>
                   </tr>
 
-                  <tr><td colspan="2" height="20"></td></tr>
+                  <tr><td colspan="2" height="20"></td></tr> <!-- mellomrom mellom rader -->
 
                   <!-- Rad 2 -->
                   <tr>
-                    <td class="stack col hotel-cell pr">
-                      <div class="hotel-card">
-                        <table role="presentation" width="100%" class="card">
-                          <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
-                            <table width="100%" style="margin-top:12px;">
-                              <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
-                              <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
-                              <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
-                            </table>
-                          </td></tr>
-                        </table>
-                      </div>
+                    <!-- W Muscat #3 -->
+                    <td class="stack col" style="width:50%; padding-right:10px;">
+                      <table role="presentation" width="100%" class="card">
+                        <tr><td style="padding:16px 18px;" class="text">
+                          <div class="hotel-title">
+                            <a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a>
+                          </div>
+                          <table width="100%" style="margin-top:12px;">
+                            <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
+                            <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
+                            <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
+                          </table>
+                        </td></tr>
+                      </table>
                     </td>
 
-                    <td class="stack col hotel-cell pl">
-                      <div class="hotel-card">
-                        <table role="presentation" width="100%" class="card">
-                          <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
-                            <table width="100%" style="margin-top:12px;">
-                              <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
-                              <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
-                              <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
-                            </table>
-                          </td></tr>
-                        </table>
-                      </div>
+                    <!-- W Muscat #4 -->
+                    <td class="stack col" style="width:50%; padding-left:10px;">
+                      <table role="presentation" width="100%" class="card">
+                        <tr><td style="padding:16px 18px;" class="text">
+                          <div class="hotel-title">
+                            <a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a>
+                          </div>
+                          <table width="100%" style="margin-top:12px;">
+                            <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
+                            <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
+                            <tr><td>Marvelous Suite</td><td align="right"><strong>NOK 65.900,-</strong></td></tr>
+                          </table>
+                        </td></tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
-
+            
             <!-- REISENS INKLUDERINGER -->
-            <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Reisens inkluderinger</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 12px;" class="px">
+                <div class="section-title">Reisens inkluderinger</div>
+              </td>
+            </tr>
             <tr>
               <td style="padding:0 40px 28px;" class="px">
                 <table role="presentation" width="100%" class="card">
@@ -238,14 +326,14 @@
                 </table>
               </td>
             </tr>
-
+            
             <!-- NOTE -->
             <tr>
               <td style="padding:0 40px 28px;" class="px text" align="left">
                 <em>Reiseforslaget er basert på dagens priser og tilgjengelighet, og tilbudet kan derfor både øke i pris og bli utsolgt før endelig bestilling. Tilbudet gjelder for 2 voksne.</em>
               </td>
             </tr>
-
+            
             <!-- CTA -->
             <tr>
               <td align="center" style="padding:0 40px 36px;" class="px">
@@ -255,14 +343,14 @@
                 </a>
               </td>
             </tr>
-
+            
             <!-- FOOTER -->
             <tr>
               <td style="padding:18px 28px; border-top:1px solid #e7e2da;" class="text" align="center" style="font-size:12px; color:#6a6a6a;">
                 © Makai Travels – En del av The Makai Travel Group
               </td>
             </tr>
-
+            
           </table>
         </td>
       </tr>
