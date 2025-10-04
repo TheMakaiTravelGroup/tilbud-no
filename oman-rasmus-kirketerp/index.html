@@ -18,26 +18,27 @@
       .section-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665; }
       .hotel-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; line-height:1.2; font-weight:700; color:#9d8665; }
 
-      .card { border:1px solid #e7e2da; border-radius:12px; }
+      .card { border:1px solid #e7e2da; border-radius:12px; background:#fff; }
       .col { vertical-align:top; }
       .muted { color:#6a6a6a; font-size:12px; line-height:18px; }
       .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
 
-      /* ————— Skarp FLYREISE design ————— */
-      .flight-card { border:1px solid #e7e2da; border-radius:12px; padding:16px 18px; background:#fff; }
-      .journey-head { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
-      .journey { margin-bottom:8px; }
-      .leg { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-      .timeport { min-width:88px; text-align:center; }
-      .time { font-weight:700; font-size:20px; line-height:1; font-variant-numeric: tabular-nums; white-space:nowrap; }
-      .port { font-size:12px; color:#6a6a6a; letter-spacing:0.6px; text-transform:uppercase; margin-top:4px; }
-      .path { flex:1; display:flex; align-items:center; gap:8px; min-width:120px; }
-      .dot { width:8px; height:8px; border-radius:999px; background:#9d8665; opacity:.9; }
-      .line { flex:1; border-top:1px dashed #dcd5c9; }
-      .airline-chip { margin-left:auto; display:inline-block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; white-space:nowrap; background:#fff; }
-      .layover { font-size:12px; color:#6a6a6a; margin:6px 0 10px; }
-      .journey-foot { font-size:12px; color:#6a6a6a; margin-top:8px; }
-      .journey-sep { margin:12px 0; border-top:1px solid #f0ece4; }
+      /* ——— FLY: venstrestillet, luftig og smal ——— */
+      .flight-inner { max-width:440px; padding:18px; }   /* smalt indhold */
+      .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
+
+      /* Ens venstrekant: chip & tider som block, nul margin-left overalt */
+      .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
+      .leg { margin:0 0 16px 0; }
+      .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
+
+      .layover { position:relative; margin:10px 0 14px 0; }
+      .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
+      /* Teksten ligger direkte ved venstrekant (ingen venstre padding) */
+      .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
+
+      .journey-sep { margin:14px 0; border-top:1px solid #f0ece4; }
+      .journey-foot { font-size:12px; color:#6a6a6a; margin-top:6px; }
 
       /* +1 markering */
       .plus1 { font-size:10px; vertical-align:super; color:#9d8665; font-weight:700; margin-left:2px; }
@@ -47,15 +48,13 @@
       .hotel-cell.pr { padding-right:10px; }
       .hotel-cell.pl { padding-left:10px; }
 
-      /* MOBILE TUNING */
+      /* MOBILE */
       @media only screen and (max-width:600px) {
         .wrap { width:100% !important; }
         .px { padding-left:20px !important; padding-right:20px !important; }
         .stack { display:block !important; width:100% !important; }
         .col { width:100% !important; }
-        .timeport { min-width:78px; }
-        .time { font-size:18px; }
-        .airline-chip { margin-top:6px; } /* hopper pænt ned på næste linje ved behov */
+        .flight-inner { max-width:100%; }
         .hotel-cell.pr, .hotel-cell.pl { padding-left:0 !important; padding-right:0 !important; }
         .hotel-card { margin-bottom:16px !important; }
       }
@@ -72,7 +71,7 @@
               <td style="padding:24px 28px; border-bottom:1px solid #e7e2da;">
                 <table role="presentation" width="100%">
                   <tr>
-                    <td align="left" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:22px; color:#1c1c1c;">Makai Travels</td>
+                    <td align="left" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; color:#1c1c1c;">Makai Travels - Beyond Excellence</td>
                     <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:12px; color:#6a6a6a;">
                       <span class="gold">Travel Designer</span><br>Rasmus Kirketerp<br>
                       <a href="mailto:rk@makaitravels.dk" style="color:#9d8665;">rk@makaitravels.dk</a>
@@ -94,91 +93,49 @@
             <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Flyreise</div></td></tr>
             <tr>
               <td style="padding:0 40px 16px;" class="px">
-                <div class="flight-card">
-                  <!-- UTREISE -->
-                  <div class="journey">
-                    <div class="journey-head">Utreise – Lørdag 07.03.2026</div>
+                <table role="presentation" width="100%" class="card">
+                  <tr><td>
+                    <div class="flight-inner">
 
-                    <!-- Leg 1 -->
-                    <div class="leg">
-                      <div class="timeport">
-                        <div class="time">15:00</div>
-                        <div class="port">CPH</div>
+                      <!-- UTREISE -->
+                      <div class="journey-title">Utreise – Lørdag 07.03.2026</div>
+
+                      <div class="leg">
+                        <div class="chip">CPH → DOH</div>
+                        <div class="times">15:00 – 23:00</div>
                       </div>
-                      <div class="path">
-                        <span class="dot"></span><span class="line"></span><span class="line"></span><span class="dot"></span>
+
+                      <div class="layover"><span>Mellomlanding i Doha • 2t 10m</span></div>
+
+                      <div class="leg">
+                        <div class="chip">DOH → MCT</div>
+                        <div class="times">01:10<sup class="plus1">+1</sup> – 04:10<sup class="plus1">+1</sup></div>
                       </div>
-                      <div class="timeport">
-                        <div class="time">23:00</div>
-                        <div class="port">DOH</div>
+
+                      <div class="journey-foot">Total reisetid utreise: 10t 55m</div>
+
+                      <div class="journey-sep"></div>
+
+                      <!-- HJEMREISE -->
+                      <div class="journey-title">Hjemreise – Søndag 15.03.2026</div>
+
+                      <div class="leg">
+                        <div class="chip">MCT → DOH</div>
+                        <div class="times">22:30 – 23:20</div>
                       </div>
-                      <span class="airline-chip">Qatar Airways</span>
+
+                      <div class="layover"><span>Mellomlanding i Doha • 1t 40m</span></div>
+
+                      <div class="leg">
+                        <div class="chip">DOH → CPH</div>
+                        <div class="times">01:00<sup class="plus1">+1</sup> – 06:35<sup class="plus1">+1</sup></div>
+                      </div>
+
+                      <div class="journey-foot">Total reisetid hjemreise: 10t 55m</div>
+
                     </div>
-
-                    <div class="layover">Mellomlanding i Doha: 2t 10m</div>
-
-                    <!-- Leg 2 -->
-                    <div class="leg">
-                      <div class="timeport">
-                        <div class="time">01:10<span class="plus1">+1</span></div>
-                        <div class="port">DOH</div>
-                      </div>
-                      <div class="path">
-                        <span class="dot"></span><span class="line"></span><span class="line"></span><span class="dot"></span>
-                      </div>
-                      <div class="timeport">
-                        <div class="time">04:10<span class="plus1">+1</span></div>
-                        <div class="port">MCT</div>
-                      </div>
-                      <span class="airline-chip">Qatar Airways</span>
-                    </div>
-
-                    <div class="journey-foot">Total reisetid utreise: 10t 55m</div>
-                  </div>
-
-                  <div class="journey-sep"></div>
-
-                  <!-- HJEMREISE -->
-                  <div class="journey">
-                    <div class="journey-head">Hjemreise – Søndag 15.03.2026</div>
-
-                    <!-- Leg 1 -->
-                    <div class="leg">
-                      <div class="timeport">
-                        <div class="time">22:30</div>
-                        <div class="port">MCT</div>
-                      </div>
-                      <div class="path">
-                        <span class="dot"></span><span class="line"></span><span class="line"></span><span class="dot"></span>
-                      </div>
-                      <div class="timeport">
-                        <div class="time">23:20</div>
-                        <div class="port">DOH</div>
-                      </div>
-                      <span class="airline-chip">Qatar Airways</span>
-                    </div>
-
-                    <div class="layover">Mellomlanding i Doha: 1t 40m</div>
-
-                    <!-- Leg 2 -->
-                    <div class="leg">
-                      <div class="timeport">
-                        <div class="time">01:00<span class="plus1">+1</span></div>
-                        <div class="port">DOH</div>
-                      </div>
-                      <div class="path">
-                        <span class="dot"></span><span class="line"></span><span class="line"></span><span class="dot"></span>
-                      </div>
-                      <div class="timeport">
-                        <div class="time">06:35<span class="plus1">+1</span></div>
-                        <div class="port">CPH</div>
-                      </div>
-                      <span class="airline-chip">Qatar Airways</span>
-                    </div>
-
-                    <div class="journey-foot">Total reisetid hjemreise: 10t 55m</div>
-                  </div>
-                </div>
+                  </td></tr>
+                </table>
               </td>
             </tr>
 
@@ -209,7 +166,7 @@
                       <div class="hotel-card">
                         <table role="presentation" width="100%" class="card">
                           <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
+                            <div class="hotel-title"><a href="#" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
                             <table width="100%" style="margin-top:12px;">
                               <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
                               <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
@@ -224,7 +181,7 @@
                       <div class="hotel-card">
                         <table role="presentation" width="100%" class="card">
                           <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
+                            <div class="hotel-title"><a href="#" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
                             <table width="100%" style="margin-top:12px;">
                               <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
                               <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
@@ -244,7 +201,7 @@
                       <div class="hotel-card">
                         <table role="presentation" width="100%" class="card">
                           <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
+                            <div class="hotel-title"><a href="#" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
                             <table width="100%" style="margin-top:12px;">
                               <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
                               <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
@@ -259,7 +216,7 @@
                       <div class="hotel-card">
                         <table role="presentation" width="100%" class="card">
                           <tr><td style="padding:16px 18px;" class="text">
-                            <div class="hotel-title"><a href="https://INNSETT-LENKE-TIL-W-MUSCAT" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
+                            <div class="hotel-title"><a href="#" target="_blank" style="color:inherit; text-decoration:none;">W Muscat 5★</a></div>
                             <table width="100%" style="margin-top:12px;">
                               <tr><td>Fabulous Room</td><td align="right"><strong>NOK 52.500,-</strong></td></tr>
                               <tr><td>Fantastic Suite</td><td align="right"><strong>NOK 59.900,-</strong></td></tr>
