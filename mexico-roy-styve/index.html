@@ -7,6 +7,9 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
 
+      /* Fix for mobile clients that auto-enlarge text */
+      body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+
       body { margin:0; padding:0; background:#fcf5f5; }
       table { border-collapse:collapse; }
       a { color:#1c1c1c; text-decoration:none; }
@@ -27,8 +30,8 @@
         font-family:'TeX Gyre Termes','Times New Roman',serif;
         font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665;
         position:relative;
-        margin:16px 0 16px;      /* ← styrer afstanden over OG under */
-        padding-top:16px;        /* luft mellom tekst og lille streg */
+        margin:16px 0 16px;
+        padding-top:16px;
       }
       .section-title:before{
         content:""; position:absolute; top:0; left:0; width:56px; height:2px; background:#9d8665;
@@ -40,6 +43,10 @@
       .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
       .leg { margin:0 0 16px 0; }
       .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
+
+      /* NY: flyselskab + flightnr-linje under tider */
+      .flight-meta { display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#6a6a6a; margin-top:2px; }
+
       .layover { position:relative; margin:10px 0 14px 0; }
       .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
       .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
@@ -94,6 +101,15 @@
         .chip{ font-size:11px !important; }
         .hotel-cap{ font-size:14px !important; }
 
+        /* Match flight + inclusions tekst med hotellenes størrelse */
+        .flight-details,
+        .flight-details .times,
+        .inclusions,
+        .flight-meta {
+          font-size:13px !important;
+          line-height:20px !important;
+        }
+
         .mobile-only{ display:block !important; }
       }
     </style>
@@ -121,7 +137,6 @@
 
             <!-- HERO -->
             <tr>
-              <!-- ↓ bund-padding sat til 0, så toppen af næste overskrift styres af .section-title margin -->
               <td style="padding:36px 40px 0;" class="px">
                 <div class="heading" style="font-size:28px; font-weight:700;">✦ REISETILBUD TIL MEXICO ✦</div>
                 <div class="text" style="margin-top:6px; color:#6a6a6a;">20. januar – 01. februar 2026 &nbsp;•&nbsp; 11 netter / 13 dager</div>
@@ -131,25 +146,40 @@
             <!-- FLY -->
             <tr><td style="padding:0 40px 0;" class="px"><div class="section-title">Flyreise</div></td></tr>
             <tr>
-              <!-- ↓ bund-padding sat til 0 for ens luft før næste overskrift -->
               <td style="padding:0 40px 0;" class="px">
-                <table role="presentation" width="100%" class="card">
+                <table role="presentation" width="100%" class="card flight-details">
                   <tr><td>
                     <div class="flight-inner">
                       <!-- UTREISE -->
                       <div class="journey-title">Utreise – tirsdag 20.01.2026</div>
-                      <div class="leg"><div class="chip">OSL → AMS</div><div class="times">06:30 – 08:30</div></div>
+                      <div class="leg">
+                        <div class="chip">OSL → AMS</div>
+                        <div class="times">06:30 – 08:30</div>
+                        <span class="flight-meta">KLM • KL 1140</span>
+                      </div>
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1 t 20 m</span></div>
-                      <div class="leg"><div class="chip">AMS → CUN</div><div class="times">09:50 – 15:05</div></div>
+                      <div class="leg">
+                        <div class="chip">AMS → CUN</div>
+                        <div class="times">09:50 – 15:05</div>
+                        <span class="flight-meta">KLM • KL 685</span>
+                      </div>
                       <div class="journey-foot">Total reisetid utreise: 14 t 35 m</div>
 
                       <div class="journey-sep"></div>
 
                       <!-- HJEMREISE -->
                       <div class="journey-title">Hjemreise – lørdag 31.01.2026</div>
-                      <div class="leg"><div class="chip">CUN → AMS</div><div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div></div>
+                      <div class="leg">
+                        <div class="chip">CUN → AMS</div>
+                        <div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div>
+                        <span class="flight-meta">KLM • KL 686</span>
+                      </div>
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1 t 35 m</span></div>
-                      <div class="leg"><div class="chip">AMS → OSL</div><div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div></div>
+                      <div class="leg">
+                        <div class="chip">AMS → OSL</div>
+                        <div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div>
+                        <span class="flight-meta">KLM • KL 1143</span>
+                      </div>
                       <div class="journey-foot">Total reisetid hjemreise: 12 t 55 m</div>
                     </div>
                   </td></tr>
@@ -160,7 +190,6 @@
             <!-- HOTELLER -->
             <tr><td style="padding:0 40px 0;" class="px"><div class="section-title">Hoteller & Priser</div></td></tr>
             <tr>
-              <!-- ↓ bund-padding sat til 0 for ens luft før næste overskrift -->
               <td style="padding:0 40px 0;" class="px">
                 <table role="presentation" width="100%">
                   <tr>
@@ -236,7 +265,7 @@
             <tr>
               <td style="padding:0 40px 28px;" class="px">
                 <table role="presentation" width="100%" class="card">
-                  <tr><td style="padding:16px 18px;" class="text">
+                  <tr><td style="padding:16px 18px;" class="text inclusions">
                     • Fly mellom Oslo og Cancún T/R | Business Class<br>
                     • Privat transport mellom flyplass og hotell T/R<br>
                     • 11 netter på valgt hotell<br>
@@ -254,11 +283,11 @@
               </td>
             </tr>
 
-            <!-- CTA (robust mailto + mobil fallback) -->
+            <!-- CTA -->
             <tr>
               <td align="center" style="padding:0 40px 36px;" class="px">
                 <a
-                  href="mailto:wp@makaitravels.no?subject=Reisetilbud%20til%20Mexico%20-%20Beyond%20Excellence&body=Hei%20Wendie%2C%0A%0AJeg%20%C3%B8nsker%20%C3%A5%20bestille%2Fjustere%20reisetilbudet.%0A%0AMvh%2C%0A"
+                  href="mailto:wp@makaitravels.no?subject=Reisetilbud%20til%20Mexico%20%7C%20Makai%20Travels%20-%20Beyond%20Excellence"
                   class="btn"
                 >
                   Bestill / Juster reisetilbudet
