@@ -45,16 +45,25 @@
       .hotel-link { margin-top:8px; }
       .hotel-long + .hotel-long { margin-top:16px; }  /* ens luft mellom kort */
 
-      /* Meal plan badges */
-      .mp{
-        display:inline-block; padding:2px 8px; margin-left:8px;
-        border:1px solid #e7e2da; border-radius:999px;
-        font-size:12px; line-height:16px; color:#6a6a6a; white-space:nowrap;
-      }
-      .mp--ai{ background:#c4dad6; border-color:#1c1c1c; } /* All-Inclusive */
-      .mp--hb{ background:#fff8ee; border-color:#f0d9b8; } /* Halvpensjon */
-      .mp--bb{ background:#eef5ff; border-color:#cfe0ff; } /* Frokost */
-      .mp--ro{ background:#f7f7f7; border-color:#e7e2da; } /* Uten måltider */
+/* Meal plan badges — premium & high-contrast */
+.mp{
+  display:inline-block;
+  padding:3px 10px;
+  margin-left:8px;
+  border:1px solid #e7e2da;
+  border-radius:999px;
+  font-size:12px;
+  line-height:16px;
+  font-weight:700;
+  color:#1c1c1c;
+  white-space:nowrap;
+}
+
+/* Varianter */
+.mp--ai{ background:#c4dad6; border-color:#9d8665; }   /* All-Inclusive */
+.mp--hb{ background:#e7e2da; border-color:#9d8665; }   /* Halvpension */
+.mp--bb{ background:#ffffff; border-color:#e7e2da; }   /* Morgenmad */
+.mp--ro{ background:#1c1c1c; color:#e7e2da; border-color:#1c1c1c; } /* Uten måltider */
 
       /* MOBILE */
       @media only screen and (max-width:600px) {
