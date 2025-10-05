@@ -45,6 +45,17 @@
       .hotel-link { margin-top:8px; }
       .hotel-long + .hotel-long { margin-top:16px; }  /* ens luft mellom kort */
 
+      /* Meal plan badges */
+      .mp{
+        display:inline-block; padding:2px 8px; margin-left:8px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; color:#6a6a6a; white-space:nowrap;
+      }
+      .mp--ai{ background:#f4faf1; border-color:#cfe5c4; } /* All-Inclusive */
+      .mp--hb{ background:#fff8ee; border-color:#f0d9b8; } /* Halvpensjon / Half board */
+      .mp--bb{ background:#eef5ff; border-color:#cfe0ff; } /* Frokost / Bed & Breakfast */
+      .mp--ro{ background:#f7f7f7; border-color:#e7e2da; } /* Room Only */
+
       /* MOBILE */
       @media only screen and (max-width:600px) {
         .wrap { width:100% !important; }
@@ -143,7 +154,10 @@
                   <tr>
                     <td class="stack col">
                       <div class="hotel-long card text">
-                        <div class="hotel-cap">Secrets Akumal 5★</div>
+                        <div class="hotel-cap">
+                          Secrets Akumal 5★
+                          <span class="mp mp--ai">All-Inclusive</span>
+                        </div>
                         <table class="rate-list">
                           <tr class="tight"><td>Preferred Club Junior Suite Swim Out</td><td align="right"><strong>NOK 179.900,-</strong></td></tr>
                           <tr class="tight"><td>Preferred Club Junior Suite Ocean View</td><td align="right"><strong>NOK 184.500,-</strong></td></tr>
@@ -154,7 +168,10 @@
                       </div>
 
                       <div class="hotel-long card text">
-                        <div class="hotel-cap">Excellence Playa Mujeres 5+★</div>
+                        <div class="hotel-cap">
+                          Excellence Playa Mujeres 5+★
+                          <span class="mp mp--ai">All-Inclusive</span>
+                        </div>
                         <table class="rate-list">
                           <tr class="tight"><td>Junior Suite Pool View</td><td align="right"><strong>NOK 184.900,-</strong></td></tr>
                           <tr class="tight"><td>Rooftop Terrace Suite Pool View</td><td align="right"><strong>NOK 197.500,-</strong></td></tr>
@@ -166,7 +183,10 @@
                       </div>
 
                       <div class="hotel-long card text">
-                        <div class="hotel-cap">Beloved Playa Mujeres 5★</div>
+                        <div class="hotel-cap">
+                          Beloved Playa Mujeres 5★
+                          <span class="mp mp--ai">All-Inclusive</span>
+                        </div>
                         <table class="rate-list">
                           <tr class="tight"><td>Junior Suite with Jacuzzi</td><td align="right"><strong>NOK 191.900,-</strong></td></tr>
                           <tr class="tight"><td>Swim Out Suite</td><td align="right"><strong>NOK 199.900,-</strong></td></tr>
@@ -177,7 +197,10 @@
                       </div>
 
                       <div class="hotel-long card text">
-                        <div class="hotel-cap">Le Blanc Cancun 5★</div>
+                        <div class="hotel-cap">
+                          Le Blanc Cancun 5★
+                          <span class="mp mp--ai">All-Inclusive</span>
+                        </div>
                         <table class="rate-list">
                           <tr class="tight"><td>Deluxe Lagoon View Room</td><td align="right"><strong>NOK 211.900,-</strong></td></tr>
                           <tr class="tight"><td>Royale Honeymoon Suite Oceanfront</td><td align="right"><strong>NOK 229.900,-</strong></td></tr>
