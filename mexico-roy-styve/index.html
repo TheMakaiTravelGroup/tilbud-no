@@ -40,6 +40,18 @@
       .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
       .leg { margin:0 0 16px 0; }
       .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
+
+      /* Liten, plassbesparende linje for flyselskap + flightnr. */
+      .carrier{
+        margin-top:2px;
+        font-size:12px;
+        line-height:16px;
+        color:#6a6a6a;
+        letter-spacing:.1px;
+        white-space:nowrap;
+      }
+      .carrier .fn{ font-variant-numeric:tabular-nums; }
+
       .layover { position:relative; margin:10px 0 14px 0; }
       .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
       .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
@@ -92,6 +104,7 @@
         .times{ font-size:14px !important; }
         .chip{ font-size:11px !important; }
         .hotel-cap{ font-size:14px !important; }
+        .carrier{ font-size:11px !important; line-height:15px !important; }
       }
     </style>
   </head>
@@ -118,7 +131,6 @@
 
             <!-- HERO -->
             <tr>
-              <!-- ↓ bund-padding sat til 0, så toppen af næste overskrift styres af .section-title margin -->
               <td style="padding:36px 40px 0;" class="px">
                 <div class="heading" style="font-size:28px; font-weight:700;">✦ REISETILBUD TIL MEXICO ✦</div>
                 <div class="text" style="margin-top:6px; color:#6a6a6a;">20. januar – 01. februar 2026 &nbsp;•&nbsp; 11 netter / 13 dager</div>
@@ -128,25 +140,40 @@
             <!-- FLY -->
             <tr><td style="padding:0 40px 0;" class="px"><div class="section-title">Flyreise</div></td></tr>
             <tr>
-              <!-- ↓ bund-padding sat til 0 for ens luft før næste overskrift -->
               <td style="padding:0 40px 0;" class="px">
                 <table role="presentation" width="100%" class="card">
                   <tr><td>
                     <div class="flight-inner">
                       <!-- UTREISE -->
                       <div class="journey-title">Utreise – tirsdag 20.01.2026</div>
-                      <div class="leg"><div class="chip">OSL → AMS</div><div class="times">06:30 – 08:30</div></div>
+                      <div class="leg">
+                        <div class="chip">OSL → AMS</div>
+                        <div class="times">06:30 – 08:30</div>
+                        <div class="carrier">KLM • <span class="fn">KL1142</span></div>
+                      </div>
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1 t 20 m</span></div>
-                      <div class="leg"><div class="chip">AMS → CUN</div><div class="times">09:50 – 15:05</div></div>
+                      <div class="leg">
+                        <div class="chip">AMS → CUN</div>
+                        <div class="times">09:50 – 15:05</div>
+                        <div class="carrier">KLM • <span class="fn">KL685</span></div>
+                      </div>
                       <div class="journey-foot">Total reisetid utreise: 14 t 35 m</div>
 
                       <div class="journey-sep"></div>
 
                       <!-- HJEMREISE -->
                       <div class="journey-title">Hjemreise – lørdag 31.01.2026</div>
-                      <div class="leg"><div class="chip">CUN → AMS</div><div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div></div>
+                      <div class="leg">
+                        <div class="chip">CUN → AMS</div>
+                        <div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div>
+                        <div class="carrier">KLM • <span class="fn">KL686</span></div>
+                      </div>
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1 t 35 m</span></div>
-                      <div class="leg"><div class="chip">AMS → OSL</div><div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div></div>
+                      <div class="leg">
+                        <div class="chip">AMS → OSL</div>
+                        <div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div>
+                        <div class="carrier">KLM • <span class="fn">KL1149</span></div>
+                      </div>
                       <div class="journey-foot">Total reisetid hjemreise: 12 t 55 m</div>
                     </div>
                   </td></tr>
@@ -157,7 +184,6 @@
             <!-- HOTELLER -->
             <tr><td style="padding:0 40px 0;" class="px"><div class="section-title">Hoteller & Priser</div></td></tr>
             <tr>
-              <!-- ↓ bund-padding sat til 0 for ens luft før næste overskrift -->
               <td style="padding:0 40px 0;" class="px">
                 <table role="presentation" width="100%">
                   <tr>
