@@ -26,26 +26,24 @@
       /* ——— FLY: venstrestillet, luftig og smal ——— */
       .flight-inner { max-width:440px; padding:18px; }   /* smalt innhold */
       .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
-
       .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
       .leg { margin:0 0 16px 0; }
       .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
-
       .layover { position:relative; margin:10px 0 14px 0; }
       .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
       .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
-
       .journey-sep { margin:14px 0; border-top:1px solid #f0ece4; }
       .journey-foot { font-size:12px; color:#6a6a6a; margin-top:6px; }
-
       .plus1 { font-size:10px; vertical-align:super; color:#9d8665; font-weight:700; margin-left:2px; }
 
-      /* Hotel – wide single cards */
-      .hotel-wide { margin-bottom:18px; }
-      .rate-table .tight td { padding:8px 0; } /* lidt mere luft i hotel-lister */
-      .price { white-space:nowrap; font-weight:700; }  /* pæn højrejustering */
-      .hotel-link { margin-top:6px; }
+      /* ——— Lange hotelkort i én kolonne ——— */
+      .hotel-long { padding:16px 18px; }
+      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; font-weight:700; color:#9d8665; }
+      .rate-list { width:100%; margin-top:12px; }
+      .rate-list tr:first-child td { border-top:0; }
       .hotel-link a { color:#9d8665; text-decoration:underline; }
+      .hotel-link { margin-top:8px; }
+      .hotel-long + .hotel-long { margin-top:16px; }  /* ens luft mellom kort */
 
       /* MOBILE */
       @media only screen and (max-width:600px) {
@@ -93,122 +91,105 @@
                 <table role="presentation" width="100%" class="card">
                   <tr><td>
                     <div class="flight-inner">
+
+                      <!-- UTREISE -->
                       <div class="journey-title">Utreise – Tirsdag 20.01.2026</div>
-                      <div class="leg"><div class="chip">OSL → AMS</div><div class="times">06:30 – 08:30</div></div>
+
+                      <div class="leg">
+                        <div class="chip">OSL → AMS</div>
+                        <div class="times">06:30 – 08:30</div>
+                      </div>
+
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1t 20m</span></div>
-                      <div class="leg"><div class="chip">AMS → CUN</div><div class="times">09:50 – 15:05</div></div>
+
+                      <div class="leg">
+                        <div class="chip">AMS → CUN</div>
+                        <div class="times">09:50 – 15:05</div>
+                      </div>
+
                       <div class="journey-foot">Total reisetid | utreise: 14t 35m</div>
 
                       <div class="journey-sep"></div>
 
+                      <!-- HJEMREISE -->
                       <div class="journey-title">Hjemreise – Lørdag 31.01.2026</div>
-                      <div class="leg"><div class="chip">CUN → AMS</div><div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div></div>
+
+                      <div class="leg">
+                        <div class="chip">CUN → AMS</div>
+                        <div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div>
+                      </div>
+
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1t 35m</span></div>
-                      <div class="leg"><div class="chip">AMS → OSL</div><div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div></div>
+
+                      <div class="leg">
+                        <div class="chip">AMS → OSL</div>
+                        <div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div>
+                      </div>
+
                       <div class="journey-foot">Total reisetid hjemreise: 12t 55m</div>
+
                     </div>
                   </td></tr>
                 </table>
               </td>
             </tr>
 
-            <!-- HOTELLER (wide single cards) -->
-            <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Hoteller i Mexico</div></td></tr>
+            <!-- HOTELLER (lange kort) -->
+            <tr><td style="padding:0 40px 18px;" class="px"><div class="section-title">Hoteller i Mexico</div></td></tr>
             <tr>
-              <td style="padding:0 40px 28px;" class="px">
+              <td style="padding:0 40px 18px;" class="px">
+                <table role="presentation" width="100%">
 
-                <!-- Hotel #1 -->
-                <div class="hotel-wide">
-                  <table role="presentation" width="100%" class="card">
-                    <tr><td style="padding:16px 18px;" class="text">
-                      <div class="hotel-title">Secrets Akumal 5★</div>
-                      <table role="presentation" width="100%" class="rate-table" style="margin-top:12px;">
-                        <tr class="tight">
-                          <td>Preferred Club Junior Suite Swim Out</td>
-                          <td align="right" class="price">NOK 179.900,-</td>
-                        </tr>
-                        <tr class="tight">
-                          <td>Preferred Club Junior Suite Ocean View</td>
-                          <td align="right" class="price">NOK 184.500,-</td>
-                        </tr>
-                      </table>
-                      <div class="hotel-link">
-                        <a href="https://www.hyattinclusivecollection.com/en/resorts-hotels/secrets/mexico/akumal-riviera-maya/" target="_blank">Se hotellet →</a>
+                  <tr>
+                    <td class="stack col">
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Secrets Akumal 5★</div>
+                        <table class="rate-list">
+                          <tr class="tight"><td>Preferred Club Junior Suite Swim Out</td><td align="right"><strong>NOK 179.900,-</strong></td></tr>
+                          <tr class="tight"><td>Preferred Club Junior Suite Ocean View</td><td align="right"><strong>NOK 184.500,-</strong></td></tr>
+                        </table>
+                        <div class="hotel-link">
+                          <a href="https://www.hyattinclusivecollection.com/en/resorts-hotels/secrets/mexico/akumal-riviera-maya/" target="_blank">Se hotellet →</a>
+                        </div>
                       </div>
-                    </td></tr>
-                  </table>
-                </div>
 
-                <!-- Hotel #2 -->
-                <div class="hotel-wide">
-                  <table role="presentation" width="100%" class="card">
-                    <tr><td style="padding:16px 18px;" class="text">
-                      <div class="hotel-title">Excellence Playa Mujeres 5+★</div>
-                      <table role="presentation" width="100%" class="rate-table" style="margin-top:12px;">
-                        <tr class="tight">
-                          <td>Junior Suite Pool View</td>
-                          <td align="right" class="price">NOK 184.900,-</td>
-                        </tr>
-                        <tr class="tight">
-                          <td>Rooftop Terrace Suite Pool View</td>
-                          <td align="right" class="price">NOK 197.500,-</td>
-                        </tr>
-                        <tr class="tight">
-                          <td>Excellence Club Rooftop Terrace Suite Ocean Front</td>
-                          <td align="right" class="price">NOK 224.900,-</td>
-                        </tr>
-                      </table>
-                      <div class="hotel-link">
-                        <a href="https://www.excellenceresorts.com/cancun/excellence-playa-mujeres/" target="_blank">Se hotellet →</a>
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Excellence Playa Mujeres 5+★</div>
+                        <table class="rate-list">
+                          <tr class="tight"><td>Junior Suite Pool View</td><td align="right"><strong>NOK 184.900,-</strong></td></tr>
+                          <tr class="tight"><td>Rooftop Terrace Suite Pool View</td><td align="right"><strong>NOK 197.500,-</strong></td></tr>
+                          <tr class="tight"><td>Excellence Club Rooftop Terrace Suite Ocean Front</td><td align="right"><strong>NOK 224.900,-</strong></td></tr>
+                        </table>
+                        <div class="hotel-link">
+                          <a href="https://www.excellenceresorts.com/cancun/excellence-playa-mujeres/" target="_blank">Se hotellet →</a>
+                        </div>
                       </div>
-                    </td></tr>
-                  </table>
-                </div>
 
-                <!-- Hotel #3 -->
-                <div class="hotel-wide">
-                  <table role="presentation" width="100%" class="card">
-                    <tr><td style="padding:16px 18px;" class="text">
-                      <div class="hotel-title">Beloved Playa Mujeres 5★</div>
-                      <table role="presentation" width="100%" class="rate-table" style="margin-top:12px;">
-                        <tr class="tight">
-                          <td>Junior Suite with Jacuzzi</td>
-                          <td align="right" class="price">NOK 191.900,-</td>
-                        </tr>
-                        <tr class="tight">
-                          <td>Swim Out Suite</td>
-                          <td align="right" class="price">NOK 199.900,-</td>
-                        </tr>
-                      </table>
-                      <div class="hotel-link">
-                        <a href="https://www.belovedhotels.com/cancun/beloved-playa-mujeres/" target="_blank">Se hotellet →</a>
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Beloved Playa Mujeres 5★</div>
+                        <table class="rate-list">
+                          <tr class="tight"><td>Junior Suite with Jacuzzi</td><td align="right"><strong>NOK 191.900,-</strong></td></tr>
+                          <tr class="tight"><td>Swim Out Suite</td><td align="right"><strong>NOK 199.900,-</strong></td></tr>
+                        </table>
+                        <div class="hotel-link">
+                          <a href="https://www.belovedhotels.com/cancun/beloved-playa-mujeres/" target="_blank">Se hotellet →</a>
+                        </div>
                       </div>
-                    </td></tr>
-                  </table>
-                </div>
 
-                <!-- Hotel #4 -->
-                <div class="hotel-wide">
-                  <table role="presentation" width="100%" class="card">
-                    <tr><td style="padding:16px 18px;" class="text">
-                      <div class="hotel-title">Le Blanc Cancun 5★</div>
-                      <table role="presentation" width="100%" class="rate-table" style="margin-top:12px;">
-                        <tr class="tight">
-                          <td>Deluxe Lagoon View Room</td>
-                          <td align="right" class="price">NOK 211.900,-</td>
-                        </tr>
-                        <tr class="tight">
-                          <td>Royale Honeymoon Suite Oceanfront</td>
-                          <td align="right" class="price">NOK 229.900,-</td>
-                        </tr>
-                      </table>
-                      <div class="hotel-link">
-                        <a href="https://cancun.leblancsparesorts.com/" target="_blank">Se hotellet →</a>
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Le Blanc Cancun 5★</div>
+                        <table class="rate-list">
+                          <tr class="tight"><td>Deluxe Lagoon View Room</td><td align="right"><strong>NOK 211.900,-</strong></td></tr>
+                          <tr class="tight"><td>Royale Honeymoon Suite Oceanfront</td><td align="right"><strong>NOK 229.900,-</strong></td></tr>
+                        </table>
+                        <div class="hotel-link">
+                          <a href="https://cancun.leblancsparesorts.com/" target="_blank">Se hotellet →</a>
+                        </div>
                       </div>
-                    </td></tr>
-                  </table>
-                </div>
+                    </td>
+                  </tr>
 
+                </table>
               </td>
             </tr>
 
