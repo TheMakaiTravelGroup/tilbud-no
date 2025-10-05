@@ -15,7 +15,6 @@
       .heading { font-family:'Playfair Display', Georgia, serif; color:#1c1c1c; }
       .text { font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; font-size:15px; line-height:24px; }
       .gold { color:#9d8665; }
-      .section-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665; }
       .hotel-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; line-height:1.2; font-weight:700; color:#9d8665; }
 
       .card { border:1px solid #e7e2da; border-radius:12px; background:#fff; }
@@ -23,8 +22,20 @@
       .muted { color:#6a6a6a; font-size:12px; line-height:18px; }
       .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
 
-      /* ——— FLY: venstrestillet, luftig og smal ——— */
-      .flight-inner { max-width:440px; padding:18px; }   /* smalt innhold */
+      /* ENS LUFT VED ALLE SEKTIONSOVERSKRIFTER (samme over/under) */
+      .section-title{
+        font-family:'TeX Gyre Termes','Times New Roman',serif;
+        font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665;
+        position:relative;
+        margin:16px 0 16px;      /* ← styrer afstanden over OG under */
+        padding-top:10px;        /* luft mellem tekst og lille streg */
+      }
+      .section-title:before{
+        content:""; position:absolute; top:0; left:0; width:56px; height:2px; background:#9d8665;
+      }
+
+      /* FLY: venstrestillet, luftig og smal */
+      .flight-inner { max-width:440px; padding:18px; }
       .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
       .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
       .leg { margin:0 0 16px 0; }
@@ -36,42 +47,51 @@
       .journey-foot { font-size:12px; color:#6a6a6a; margin-top:6px; }
       .plus1 { font-size:10px; vertical-align:super; color:#9d8665; font-weight:700; margin-left:2px; }
 
-      /* ——— Lange hotelkort i én kolonne ——— */
+      /* Lange hotelkort i én kolonne */
       .hotel-long { padding:16px 18px; }
-      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; font-weight:700; color:#9d8665; }
+      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
       .rate-list { width:100%; margin-top:12px; }
+      .rate-list td { vertical-align:top; }
+      .rate-list td:first-child { padding-right:12px; }
       .rate-list tr:first-child td { border-top:0; }
       .hotel-link a { color:#9d8665; text-decoration:underline; }
       .hotel-link { margin-top:8px; }
-      .hotel-long + .hotel-long { margin-top:16px; }  /* ens luft mellom kort */
+      .hotel-long + .hotel-long { margin-top:16px; }
 
-/* Meal plan badges — premium & high-contrast */
-.mp{
-  display:inline-block;
-  padding:3px 10px;
-  margin-left:8px;
-  border:1px solid #e7e2da;
-  border-radius:999px;
-  font-size:12px;
-  line-height:16px;
-  font-weight:700;
-  color:#1c1c1c;
-  white-space:nowrap;
-}
+      /* Meal plan badges – premium */
+      .mp{
+        display:inline-block; padding:3px 10px; margin-left:8px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; white-space:nowrap;
+      }
+      .mp--ai{ background:#c4dad6; border-color:#9d8665; }
+      .mp--hb{ background:#e7e2da; border-color:#9d8665; }
+      .mp--bb{ background:#ffffff; border-color:#e7e2da; }
+      .mp--ro{ background:#1c1c1c; color:#e7e2da; border-color:#1c1c1c; }
 
-/* Varianter */
-.mp--ai{ background:#c4dad6; border-color:#9d8665; }   /* All-Inclusive */
-.mp--hb{ background:#e7e2da; border-color:#9d8665; }   /* Halvpension */
-.mp--bb{ background:#ffffff; border-color:#e7e2da; }   /* Morgenmad */
-.mp--ro{ background:#1c1c1c; color:#e7e2da; border-color:#1c1c1c; } /* Uten måltider */
+      /* CTA */
+      .btn{
+        display:inline-block; padding:14px 24px; border:1px solid #9d8665; border-radius:999px;
+        background:#e7e2da; color:#1c1c1c; font-family:'TeX Gyre Termes','Times New Roman',serif;
+        font-size:13px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; text-decoration:none;
+      }
 
-      /* MOBILE */
+      /* MOBILE tweaks */
       @media only screen and (max-width:600px) {
         .wrap { width:100% !important; }
         .px { padding-left:20px !important; padding-right:20px !important; }
         .stack { display:block !important; width:100% !important; }
         .col { width:100% !important; }
         .flight-inner { max-width:100%; }
+
+        .heading{ font-size:24px !important; }
+        .section-title{ font-size:16px !important; }
+        .text{ font-size:14px !important; line-height:22px !important; }
+        .journey-title{ font-size:15px !important; }
+        .times{ font-size:14px !important; }
+        .chip{ font-size:11px !important; }
+        .hotel-cap{ font-size:14px !important; }
       }
     </style>
   </head>
@@ -98,70 +118,51 @@
 
             <!-- HERO -->
             <tr>
-              <td style="padding:36px 40px 20px;" class="px">
+              <!-- ↓ bund-padding sat til 0, så toppen af næste overskrift styres af .section-title margin -->
+              <td style="padding:36px 40px 0;" class="px">
                 <div class="heading" style="font-size:28px; font-weight:700;">✦ REISETILBUD TIL MEXICO ✦</div>
                 <div class="text" style="margin-top:6px; color:#6a6a6a;">20. januar–01. februar 2026 &nbsp;•&nbsp; 11 netter / 13 dager</div>
               </td>
             </tr>
 
             <!-- FLY -->
-            <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Flyreise</div></td></tr>
+            <tr><td style="padding:0 40px 0;" class="px"><div class="section-title">Flyreise</div></td></tr>
             <tr>
-              <td style="padding:0 40px 16px;" class="px">
+              <!-- ↓ bund-padding sat til 0 for ens luft før næste overskrift -->
+              <td style="padding:0 40px 0;" class="px">
                 <table role="presentation" width="100%" class="card">
                   <tr><td>
                     <div class="flight-inner">
-
                       <!-- UTREISE -->
                       <div class="journey-title">Utreise – Tirsdag 20.01.2026</div>
-
-                      <div class="leg">
-                        <div class="chip">OSL → AMS</div>
-                        <div class="times">06:30 – 08:30</div>
-                      </div>
-
+                      <div class="leg"><div class="chip">OSL → AMS</div><div class="times">06:30 – 08:30</div></div>
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1t 20m</span></div>
-
-                      <div class="leg">
-                        <div class="chip">AMS → CUN</div>
-                        <div class="times">09:50 – 15:05</div>
-                      </div>
-
+                      <div class="leg"><div class="chip">AMS → CUN</div><div class="times">09:50 – 15:05</div></div>
                       <div class="journey-foot">Total reisetid | utreise: 14t 35m</div>
 
                       <div class="journey-sep"></div>
 
                       <!-- HJEMREISE -->
                       <div class="journey-title">Hjemreise – Lørdag 31.01.2026</div>
-
-                      <div class="leg">
-                        <div class="chip">CUN → AMS</div>
-                        <div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div>
-                      </div>
-
+                      <div class="leg"><div class="chip">CUN → AMS</div><div class="times">16:55 – 08:30<sup class="plus1">+1</sup></div></div>
                       <div class="layover"><span>Mellomlanding i Amsterdam • 1t 35m</span></div>
-
-                      <div class="leg">
-                        <div class="chip">AMS → OSL</div>
-                        <div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div>
-                      </div>
-
+                      <div class="leg"><div class="chip">AMS → OSL</div><div class="times">10:05<sup class="plus1">+1</sup> – 11:50<sup class="plus1">+1</sup></div></div>
                       <div class="journey-foot">Total reisetid hjemreise: 12t 55m</div>
-
                     </div>
                   </td></tr>
                 </table>
               </td>
             </tr>
 
-            <!-- HOTELLER (lange kort) -->
-            <tr><td style="padding:0 40px 18px;" class="px"><div class="section-title">Hoteller i Mexico</div></td></tr>
+            <!-- HOTELLER -->
+            <tr><td style="padding:0 40px 0;" class="px"><div class="section-title">Hoteller i Mexico</div></td></tr>
             <tr>
-              <td style="padding:0 40px 18px;" class="px">
+              <!-- ↓ bund-padding sat til 0 for ens luft før næste overskrift -->
+              <td style="padding:0 40px 0;" class="px">
                 <table role="presentation" width="100%">
-
                   <tr>
                     <td class="stack col">
+                      <!-- Hotel 1 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">
                           Secrets Akumal 5★
@@ -176,6 +177,7 @@
                         </div>
                       </div>
 
+                      <!-- Hotel 2 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">
                           Excellence Playa Mujeres 5+★
@@ -191,6 +193,7 @@
                         </div>
                       </div>
 
+                      <!-- Hotel 3 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">
                           Beloved Playa Mujeres 5★
@@ -205,6 +208,7 @@
                         </div>
                       </div>
 
+                      <!-- Hotel 4 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">
                           Le Blanc Cancun 5★
@@ -220,13 +224,12 @@
                       </div>
                     </td>
                   </tr>
-
                 </table>
               </td>
             </tr>
 
-            <!-- REISETILBUDET INKLUDERER -->
-            <tr><td style="padding:0 40px 12px;" class="px"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
+            <!-- INKLUDERINGER -->
+            <tr><td style="padding:0 40px 0;" class="px"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
             <tr>
               <td style="padding:0 40px 28px;" class="px">
                 <table role="presentation" width="100%" class="card">
@@ -251,8 +254,7 @@
             <!-- CTA -->
             <tr>
               <td align="center" style="padding:0 40px 36px;" class="px">
-                <a href="mailto:wp@makaitravels.no?subject=Reisetilbud%20til%20Mexico%20-%20Beyond%20Excellence"
-                   style="display:inline-block; padding:14px 24px; border:1px solid #9d8665; border-radius:999px; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; font-weight:600; letter-spacing:0.6px; text-transform:uppercase; color:#1c1c1c;">
+                <a href="mailto:wp@makaitravels.no?subject=Reisetilbud%20til%20Mexico%20-%20Beyond%20Excellence" class="btn">
                   Bestill / Juster reisetilbudet
                 </a>
               </td>
