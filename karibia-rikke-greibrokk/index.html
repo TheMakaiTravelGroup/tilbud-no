@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="nb" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reisetilbud til Karibia</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+      body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+      body { margin:0; padding:0; background:#faf7f2; overflow-x:hidden; }
+      table { border-collapse:collapse; table-layout:fixed; }
+      a { color:#1c1c1c; text-decoration:none; word-break:break-word; }
+
+      .heading { font-family:'Playfair Display', Georgia, serif; color:#1c1c1c; }
+      .text { font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; font-size:15px; line-height:24px; }
+      .gold { color:#9d8665; }
+
+      .card { border:1px solid #e7e2da; border-radius:12px; background:#fff; }
+      .col { vertical-align:top; }
+      .muted { color:#6a6a6a; font-size:12px; line-height:18px; }
+
+      .section-title{
+        font-family:'TeX Gyre Termes','Times New Roman',serif;
+        font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665;
+        position:relative; margin:16px 0 16px; padding-top:16px;
+      }
+      .section-title:before{ content:""; position:absolute; top:0; left:0; width:56px; height:2px; background:#9d8665; }
+
+      /* ---------- Easy spacing knobs (desktop/global) ---------- */
+      .sp-chips-hero { margin-top:8px !important; }       /* chips -> HERO (global; mobil overstyrer nederst) */
+      .sp-hero-divider { margin-top:14px !important; }    /* HERO -> divider (rate-list) */
+      .sp-mp-extras { margin-top:1px !important; }        /* Meal plan -> Høydepunkter */
+      .sp-total-up { padding-top:18px !important; }       /* over totalpris-boks */
+      .sp-total-down { padding-bottom:6px !important; }   /* under totalpris-boks */
+      .sp-includes-top { padding-top:4px !important; }    /* ekstra top-luft før guldstreg */
+
+      /* Hjælpeklasser */
+      .nowrap{ white-space:nowrap; }
+      .br-m{ display:none; }  /* linjebrud kun på mobil (aktiveres i media query) */
+
+      /* Fly */
+      .flight-inner { max-width:440px; padding:18px; }
+      .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
+      .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
+      .leg { margin:0 0 14px 0; }
+      .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
+      .flight-meta { display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#6a6a6a; margin-top:2px; }
+
+      .layover { position:relative; margin:0 0 14px 0; }
+      .leg + .layover { margin-top:0; }
+      .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
+      .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
+
+      .journey-sep { margin:14px 0; border-top:1px solid #f0ece4; }
+      .journey-foot { font-size:12px; color:#6a6a6a; margin-top:6px; }
+
+      .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
+
+      /* Hoteller */
+      .hotel-long { padding:18px 20px; overflow:hidden; }
+      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
+
+      /* Lokasjon + dato */
+      .hotel-loc{ margin:6px 0 4px; }
+      .hotel-dates{ margin:0 0 8px; }
+      .loc{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#fff; white-space:nowrap;
+      }
+      .loc:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle;
+      }
+      .stay{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #d7cbbb; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#f9f6f0; white-space:nowrap;
+      }
+      .stay:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle;
+      }
+
+      /* GALLERI – desktop: ET hero-bilde, mobil: 5-swipe */
+      .gallery-desktop{ border-radius:12px; overflow:hidden; }
+      .gallery-desktop img{
+        display:block; width:100%; height:280px; object-fit:cover;
+        border:1px solid #e7e2da; border-radius:12px;
+      }
+      .gallery-mobile{ display:none; border-radius:12px; overflow:hidden; }
+      .gallery-strip{
+        display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%;
+      }
+      .gallery-strip a{ display:inline-block; width:auto; margin-right:8px; }
+      .gallery-strip a:last-child{ margin-right:0; }
+      .gallery-strip img{
+        display:block; height:180px; width:auto; object-fit:cover;
+        border:1px solid #e7e2da; border-radius:12px;
+      }
+      .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:2px; text-align:left; }
+
+      .rate-list { width:100%; }
+      .hotel-long .tight td { padding:12px 0 16px; border-top:1px solid #f0ece4; }
+
+      .mp{
+        display:inline-block; padding:3px 10px; margin:10px 0 0;
+        border:1px solid #9d8665; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#c4dad6; white-space:nowrap;
+      }
+
+      .hotel-link a { color:#9d8665; text-decoration:underline; }
+      .hotel-link { margin-top:10px; }
+      .hotel-long + .hotel-long { margin-top:18px; }
+
+      .hotel-meta{ margin-top:14px; }
+      .tr{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#fff; white-space:nowrap;
+      }
+      .tr:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle;
+      }
+
+      .room-link{ margin-top:4px; font-size:12px; line-height:18px; color:#6a6a6a; }
+      .room-link a{ color:#9d8665; text-decoration:underline; }
+
+      /* Match "Se villaen →" styling for extras-more */
+      .extras-more{ margin-top:6px; font-size:12px; line-height:18px; }
+      .extras-more a{ color:#9d8665; text-decoration:underline; }
+
+      .extras{
+        margin-bottom:8px; padding:12px 12px 12px;
+        border:1px solid #e7e2da; border-radius:10px; background:#f9f6f0;
+      }
+      .extras-title{ margin:0 0 6px; font-size:13px; font-weight:700; color:#9d8665; line-height:18px; }
+      .extras-list{ margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#1c1c1c; }
+
+      /* Totalpris-boks */
+      .totalbox{
+        border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0;
+        padding:14px 18px;
+      }
+      .totalrow{ width:100%; }
+      .totalrow td{ vertical-align:top; }
+      .total-title{
+        font-family:'TeX Gyre Termes','Times New Roman',serif;
+        font-weight:700; text-transform:uppercase; color:#9d8665; font-size:14px;
+      }
+      .total-amt{ font-weight:700; font-size:18px; text-align:right; white-space:nowrap; }
+      .total-note{ margin-top:6px; color:#6a6a6a; font-size:12px; line-height:18px; }
+
+      /* Desktop: vis lokasjon/dato side om side */
+      @media only screen and (min-width:601px){
+        .hotel-loc{ margin-right:6px; display:inline-block; }
+        .hotel-dates{ display:inline-block; }
+      }
+
+      /* --------------------------- MOBIL (≤600px) --------------------------- */
+      @media only screen and (max-width:600px){
+
+        /* ----- MOBIL – spacing knobs ----- */
+        .sp-gap-chips{ margin-top:6px !important; }     /* DESTINATION chip -> DATO chip */
+        .sp-chips-hero{ margin-top:12px !important; }   /* DATO chip -> HERO */
+        .br-m{ display:inline; }                        /* aktiver linjebrud i totalpris */
+
+        /* Mobil: swipe-galleri, mindre luft til hint (KUN mobil) */
+        .gallery-desktop{ display:none !important; }
+        .gallery-mobile{ display:block !important; }
+        .gallery-strip{ display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; transition:none; }
+        .gallery-strip a{ display:inline-block; width:auto; margin-right:8px; flex:none; }
+        .gallery-strip img{ height:180px !important; width:auto; }
+        .gallery .prev, .gallery .next{ display:none !important; }
+        .scroll-hint{ display:block !important; margin-top:2px !important; }
+
+        /* Container */
+        .wrap { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
+        .px { padding-left:18px !important; padding-right:18px !important; }
+
+        /* Typografi */
+        .heading{ font-size:24px !important; }
+        .section-title{ font-size:16px !important; }
+        .text{ font-size:15px !important; line-height:23px !important; }
+        .journey-title{ font-size:15px !important; }
+        .times{ font-size:15px !important; }
+        .chip{ font-size:11px !important; }
+        .hotel-cap{ font-size:15px !important; }
+        .hotel-long{ padding:18px 18px !important; }
+
+        /* Billeder & overflow-sikring */
+        img{ max-width:100% !important; height:auto !important; }
+        body, table, td{ max-width:100% !important; }
+
+        @media only screen and (max-width:600px){
+  /* ... your other mobile rules ... */
+  .total-amt{ font-size:16px !important; line-height:1.2; }
+}
+      }
+    </style>
+  </head>
+  <body>
+    <table role="presentation" width="100%" bgcolor="#faf7f2">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table role="presentation" width="680" class="wrap" bgcolor="#ffffff" style="border:1px solid #d7cbbb; border-radius:14px; overflow:hidden;">
+
+            <!-- HEADER -->
+            <tr>
+              <td style="padding:24px 28px; border-bottom:1px solid #e7e2da;">
+                <table role="presentation" width="100%">
+                  <tr>
+                    <td align="left" style="line-height:0;">
+                      <a href="https://www.makaitravels.no" target="_blank" style="display:inline-block; text-decoration:none;">
+                        <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/LOGO-PNG-04-1-scaled.png" width="130" alt="Makai – Beyond Excellence" style="display:block; border:0; outline:none; text-decoration:none; height:auto;">
+                      </a>
+                    </td>
+                    <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; color:#6a6a6a;">
+                      <span style="font-family:'Playfair Display',serif; color:#9d8665; font-size:13.5px; letter-spacing:1px; text-transform:uppercase;">Travel Designer</span><br>Wendie Pedersen<br>
+                      <a href="mailto:wp@makaitravels.no" style="color:#9d8665; text-decoration:underline;">wp@makaitravels.no</a><br>
+                      <a href="tel:+4723965171" style="color:#9d8665; text-decoration:underline;">+47&nbsp;23&nbsp;96&nbsp;51&nbsp;71</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- HERO -->
+            <tr>
+              <td style="padding:36px 40px 0;" class="px">
+                <div class="heading" style="font-size:28px; font-weight:700;">REISETILBUD TIL KARIBIA</div>
+                <div class="text" style="margin-top:6px; color:#6a6a6a;">25. februar – 26. mars 2026 &nbsp;•&nbsp; 29 netter</div>
+              </td>
+            </tr>
+
+            <!-- FLY -->
+            <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Flyreise</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 0;" class="px">
+                <table role="presentation" width="100%" class="card flight-details">
+                  <tr><td>
+                    <div class="flight-inner">
+                      <div class="journey-title">St. Maarten til Antigua – 04.03.2026</div>
+                      <div class="leg">
+                        <div class="chip">SXM → ANU</div>
+                        <div class="times">10:45 – 11:30</div>
+                        <span class="flight-meta">Sunrise Airways • S6 805</span>
+                      </div>
+                      <div class="journey-foot">Total reisetid: 45 m</div>
+
+                      <div class="journey-sep"></div>
+
+<!-- EKSTRA REISE (MUSCAT → ABU DHABI → MALÉ) -->
+<div class="journey-title">Antigua til St. Lucia – 11.03.2026</div>
+
+<div class="leg">
+  <div class="chip">ANU → BGI</div>
+  <div class="times">16:30 – 17:35</div>
+  <span class="flight-meta">InterCaribbean • JY 797</span>
+</div>
+
+<div class="layover"><span>Mellomlanding på Barbados • 40 m</span></div>
+
+<div class="leg">
+  <div class="chip">BGI → SLU</div>
+  <div class="times">18:15 – 19:00</div>
+  <span class="flight-meta">InterCaribbean • JY 766</span>
+</div>
+
+<div class="journey-foot">Total reisetid: 2 t 30 m</div>
+
+<div class="journey-sep"></div>
+
+                      <div class="journey-title">St. Lucia til Grenada – 19.03.2026</div>
+                      <div class="leg">
+                        <div class="chip">SLU → BGI</div>
+                        <div class="times">15:20 – 16:00</div>
+                        <span class="flight-meta">Caribbean Airlines • BW 235</span>
+                      </div>
+                      <div class="layover"><span>Mellomlanding i Barbados • 1 t 15 m</span></div>
+                      <div class="leg">
+                        <div class="chip">BGI → GND</div>
+                        <div class="times">17:15 – 18:10</div>
+                        <span class="flight-meta">Caribbean Airlines • BW 232</span>
+                      </div>
+                      <div class="journey-foot">Total reisetid: 2 t 50 m</div>
+                    </div>
+                  </td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- HOTELLER -->
+            <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Her skal dere bo</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 0;" class="px">
+                <table role="presentation" width="100%">
+                  <tr>
+                    <td class="stack col">
+
+                      <!-- Hotel 1 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Malliouhana 5★</div>
+                        <div class="hotel-loc"><span class="loc">Anguilla • Meads Bay</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">25. februar – 04. mars 2026 • 7 netter</span></div>
+
+                        <!-- Desktop hero -->
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-6.jpg" target="_blank">
+                            <img src="htthttps://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-6.jpg" alt="Malliouhana - Anguilla">
+                          </a>
+                        </div>
+                        <!-- Mobile swipe -->
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-6.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-6.jpg" alt="Malliouhana - Anguilla">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-5.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-5.jpg" alt="Malliouhana - Beachfront Room">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-3.png" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-3.png" alt="Malliouhana - Restaurant">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-2.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-2.jpg" alt="Malliouhana - Entrance">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-4.webp" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Malliouhana-4.webp" alt="Malliouana - Exterior">
+                            </a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Ocean View Premium Room
+                              <div class="room-link">
+                                <a href="https://malliouhana.com/stay/ocean-view-premium-room/" target="_blank">Se rommet →</a>
+                              </div>
+                              <span class="mp">Uten måltider</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+<li>Legendarisk strandluksus på ikoniske Meads Bay</li>
+<li>Fantastisk blanding av karibisk sjarm og eleganse</li>
+<li>Gourmetopplevelser med utsikt over det karibiske hav</li>
+<li>Stilrene villaer badet i sollys og havbris</li>
+<li>En tidløs følelse av ro, raffinement og frihet</li>
+                          </ul>
+                          <div class="extras-more"><a href="https://caribiatravels-my.sharepoint.com/:b:/g/personal/caribia_caribia_dk/Eb496Fnje31Lubp9rKjCZIwBM_j_-qNvYrqCXuKd6sgKeA?e=ggdk8F" target="_blank">Se brosjyre →</a></div>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Båt fra St. Maarten (ca. 25 min.)</span></div>
+                        <div class="hotel-link"><a href="https://malliouhana.com/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                      <!-- Hotel 2 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">The Inn at English Harbour 4+★</div>
+                        <div class="hotel-loc"><span class="loc">Antigua • Freeman's Bay</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">04. mars – 11. mars 2026 • 7 netter</span></div>
+
+                        <!-- Desktop hero (ADDED) -->
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-2.webp" target="_blank">
+                            <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-2.webp" alt="The Inn at English Harbour - Aerial">
+                          </a>
+                        </div>
+                        <!-- Mobile swipe -->
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-2.webp" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-2.webp" alt="The Inn at English Harbour - Aerial">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-5.webp" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-5.webp" alt="The Inn at English Harbour - Room">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-4.png" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-4.png" alt="The Inn at English Harbour - Tropical Beach">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-1.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-1.jpg" alt="The Inn at English Harbour - Harbour">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-3.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/The-Inn-at-English-Harbour-3.jpg" alt="The Inn at English Harbour - Beach">
+                            </a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Junior Suite
+                              <div class="room-link">
+                                <a href="https://www.theinnantigua.com/five-star-boutique-hotel" target="_blank">Se rommet →</a>
+                              </div>
+                              <span class="mp">Frokost</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+<li>Klassisk, elegant boutiquehotell ved stranden</li>
+<li>Unik beliggenhet ved historiske English Harbour</li>
+<li>Raffinert karibisk atmosfære og sjarm</li>
+<li>Medlem av Small Luxury Hotels of the World</li>
+<li>Rolig og eksklusivt – kun for voksne</li>
+                          </ul>
+                          <div class="extras-more"><a href="https://www.theinnantigua.com/english-harbour-hotel" target="_blank">Se brosjyre →</a></div>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Privat transfer (ca. 40 min.)</span></div>
+                        <div class="hotel-link"><a href="https://www.theinnantigua.com/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                      <!-- Hotel 3 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Sandals Halcyon Beach 4+★</div>
+                        <div class="hotel-loc"><span class="loc">St. Lucia • Castries</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">11. mars – 19. mars 2026 • 8 netter</span></div>
+
+                        <!-- Desktop hero (ADDED) -->
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-1.webp" target="_blank">
+                            <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-1.webp" alt="Sandals Halcyon Beach - Beachfront Resort">
+                          </a>
+                        </div>
+                        <!-- Mobile swipe -->
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-1.webp" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-1.webp" alt="Sandals Halcyon Beach - Beachfront Resort">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-4-scaled.jpeg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-4-scaled.jpeg" alt="Sandals Halcyon Beach - Beach">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-5-scaled.jpeg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-5-scaled.jpeg" alt="Sandals Halcyon Beach - Swim Up Suite">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-2.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-2.jpg" alt="Sandals Halcyon Beach - Pool">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-6.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach-6.jpg" alt="Sandals Halcyon Beach - Beachfront Location">
+                            </a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Crystal Lagoon Walkout Swim-Up Club Level (WPL)
+                              <div class="room-link">
+                                <a href="https://www.sandals.com/halcyon-beach/rooms-suites/?categoryCode=WPL&rstCode=SHC" target="_blank">Se rommet →</a>
+                              </div>
+                              <span class="mp">All-Inclusive (Dine Around)</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+<li>Romantisk All Inclusive-resort kun for voksne</li>
+<li>Ligger ved en vakker, rolig strand i Castries</li>
+<li>Swim-up-suiter med direkte bassengadgang</li>
+<li>Tilgang til alle fasiliteter på tre Sandals-resorts</li>
+<li>Stort utvalg restauranter og aktiviteter</li>
+                          </ul>
+                          <div class="extras-more"><a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Sandals-Halcyon-Beach.pdf" target="_blank">Se brosjyre →</a></div>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Delt transfer (ca. 10 min.)</span></div>
+                        <div class="hotel-link"><a href="https://www.sandals.com/halcyon-beach/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                      <!-- Hotel 4 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Spice Island Beach Resort 5★</div>
+                        <div class="hotel-loc"><span class="loc">Grenada • Grand Anse Beach</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">19. mars – 26. mars 2026 • 7 netter</span></div>
+
+                        <!-- Desktop hero (ADDED) -->
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-6.jpg" target="_blank">
+                            <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-6.jpg" alt="Spice Island Beach Resort - Beachfront Resort">
+                          </a>
+                        </div>
+                        <!-- Mobile swipe -->
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-6.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-6.jpg" alt="Spice Island Beach Resort - Beachfront Resort">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-3.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-3.jpg" alt="Spice Island Beach Resort - Beach">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-4.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-4.jpg" alt="Spice Island Beach Resort - View From Suite">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-2.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-2.jpg" alt="Spice Island Beach Resort - Tropical">
+                            </a>
+                            <a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-5.jpg" target="_blank">
+                              <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort-5.jpg" alt="Spice Island Beach Resort - Pool">
+                            </a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Oleander Superior Garden Suite
+                              <div class="room-link">
+                                <a href="https://www.spiceislandbeachresort.com/rooms-in-grenada/oleander-garden-and-superior-garden-suites" target="_blank">Se rommet →</a>
+                              </div>
+                              <span class="mp">All-Inclusive</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+<li>All Inclusive-resort ved Grand Anse Beach</li>
+<li>Familiedrevet ikon innen karibisk luksus</li>
+</li>Klassisk kolonial eleganse med personlig service</li>
+<li>Prisbelønt restaurant med karibisk gourmetkjøkken</li>
+<li>Et av Grenadas mest anerkjente luksusresorts</li>
+                          </ul>
+                          <div class="extras-more"><a href="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/Spice-Island-Beach-Resort.pdf" target="_blank">Se brosjyre →</a></div>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Privat transfer (ca. 15 min.)</span></div>
+                        <div class="hotel-link"><a href="https://www.spiceislandbeachresort.com/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- TOTALPRIS-BOKS -->
+            <tr>
+              <td style="padding:10px 40px 10px;" class="px sp-total-up sp-total-down">
+                <div class="totalbox">
+                  <table class="totalrow" role="presentation">
+                    <tr>
+                      <!-- Mobil: linjebrud efter "Totalpris for" -->
+                      <td class="total-title">Totalpris for<span class="br-m"><br></span> <span class="nowrap">reisen med Makai</span></td>
+                      <td class="total-amt">NOK 418.900,-</td>
+                    </tr>
+                  </table>
+                  <div class="total-note">
+                    Reiseforslaget er basert på dagens priser og ledighet, og prisene kan derfor både øke og bli utsolgt før endelig bestilling. Reisetilbudet gjelder for 2 voksne.
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- INKLUDERER -->
+            <tr><td style="padding:10px 40px 10px;" class="px sp-includes-top"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 28px;" class="px">
+                <table role="presentation" width="100%" class="card">
+                  <tr><td style="padding:16px 18px;" class="text inclusions">
+                    • Fly som angitt i tilbudet | Economy Class<br>
+                    • Transfer som angitt i tilbudet<br>
+                    • Hotell som angitt i tilbudet<br>
+                    • Måltider som angitt i tilbudet<br>
+                    • Obligatoriske skatter og avgifter
+                  </td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- CTA + FOOTER -->
+            <tr>
+              <td align="center" style="padding:0 40px 28px;" class="px">
+                <a href="mailto:wp@makaitravels.no?subject=Reisetilbud%20til%20Maldivene%20%7C%Makai%20-%20Beyond%20Excellence"
+                   style="background:#e7e2da;border:1px solid #9d8665;border-radius:999px;color:#1c1c1c;display:inline-block;font-family:'TeX Gyre Termes','Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:.6px;line-height:16px;text-transform:uppercase;text-decoration:none;padding:14px 24px;">
+                  Bestill / juster reisetilbudet
+                </a>
+                <div class="muted mobile-only" style="margin-top:8px;">
+                  Fungerer ikke knappen? Skriv til <a href="mailto:wp@makaitravels.no">wp@makaitravels.no</a>.
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" class="text" style="padding:18px 18px; border-top:1px solid #e7e2da; color:#6a6a6a; font-size:12px; line-height:18px;">
+                <table role="presentation" width="100%" style="border-collapse:collapse;">
+                  <tr><td align="center" style="padding:0 0 8px 0;">
+                    <a href="https://no.trustpilot.com/review/www.caribia.dk?languages=all" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+                      <img src="https://maldivia.dk/wp-content/uploads/2025/10/Trustpilot.png" width="120" alt="Trustpilot – 5 stjerners anmeldelser" style="display:block; border:0; outline:none; height:auto;">
+                    </a>
+                  </td></tr>
+                  <tr><td align="center" style="padding:0 0 8px 0;">
+                    <a href="https://www.makaitravels.no" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+                      <img src="https://makaitravels.dk/wp-content/uploads/sites/3/2025/10/LOGO-PNG-04-1-scaled.png" width="130" alt="Makai – Beyond Excellence" style="display:block; border:0; outline:none; height:auto;">
+                    </a>
+                  </td></tr>
+                  <tr><td align="center" style="padding:0 0 14px 0;">
+                    <a href="https://www.rejsegarantifonden.dk/medlem?s=2688" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+                      <img src="https://maldivia.dk/wp-content/uploads/2025/10/Rejsegarantifonden.png" width="110" alt="Medlem av Rejsegarantifonden" style="display:block; border:0; outline:none; height:auto;">
+                    </a>
+                  </td></tr>
+                  <tr><td align="center" style="padding:0;">© Makai – En del av The Makai Travel Group</td></tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
